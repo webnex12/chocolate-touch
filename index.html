@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chocolate Touch · profile style menu</title>
+    <title>Organic Matcha Cafe · profile style menu</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Font: Inter (clean) -->
@@ -116,6 +116,25 @@
             width: 24px;
             font-size: 1.2rem;
         }
+
+        /* Social media icons */
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.35rem;
+    width: auto;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-2px) scale(1.1);
+}
 
         /* cart summary (like facebook actions) */
         .cart-summary {
@@ -711,6 +730,123 @@
         transform: translateY(0);
     }
 }
+
+/* =========================
+   PAYMENT OPTIONS
+========================= */
+
+.payment-options {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.payment-option {
+    flex: 1;
+    cursor: pointer;
+    margin: 0;
+}
+
+.payment-option input {
+    display: none;
+}
+
+.payment-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 75px;
+    padding: 12px;
+    background: #faf7f3;
+    border: 2px solid #e3d9d1;
+    border-radius: 18px;
+    color: #4f3f34;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+    text-align: center;
+}
+
+.payment-card i {
+    font-size: 1.4rem;
+    color: #39231a;
+}
+
+.payment-option input:checked + .payment-card {
+    border-color: #39231a;
+    background: #f0e5dd;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   WISH MONEY BOX
+========================= */
+
+.wish-money-box {
+    display: none;
+    background: #f8f3ee;
+    border: 2px solid #c19961;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.wish-money-box.show {
+    display: block;
+}
+
+.wish-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #39231a;
+    margin-bottom: 10px;
+}
+
+.wish-title i {
+    margin-right: 7px;
+}
+
+.wish-money-box p {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #6b5b4e;
+}
+
+.wish-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: white;
+    border-radius: 14px;
+    padding: 12px;
+    margin: 10px 0 12px;
+    font-size: 1.15rem;
+    color: #39231a;
+}
+
+.wish-number i {
+    color: #39231a;
+}
+
+.wish-instruction {
+    margin-top: 8px;
+}
+
+#wishTransactionId {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #e3d9d1;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+#wishTransactionId:focus {
+    border-color: #39231a;
+}
     </style>
 </head>
 <body>
@@ -749,6 +885,20 @@
         <div class="contact-strip">
             <div style="width: 100%;"><i class="fas fa-map-pin"></i> Daraya</div>
             <div><i class="fas fa-phone-alt"></i> +961 03878053</div>
+            <!-- Social Media -->
+    <div class="social-links">
+        <a href="https://www.instagram.com/chocolate_touch_daraya?igsi=bGdsMzY3YnZ0am1t" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+
+        <a href="https://vm.tiktok.com/ZS9BmTxKbyVQm-2BQxu/" target="_blank" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+        </a>
+
+        <a href="https://www.facebook.com/YOUR_FACEBOOK" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+    </div>
         </div>
 
         <!-- cart summary strip (similar to facebook actions) -->
@@ -810,32 +960,93 @@
     </div>
 
     <!-- CUSTOMER DETAILS MODAL -->
-    <div class="modal-overlay" id="customerModal">
-        <div class="modal-content">
-            <h2>almost there! <span style="font-size: 1.5rem;">📋</span></h2>
-            <p>Please enter your details to complete the order</p>
-            
-            <div class="input-group">
-                <label>full name</label>
-                <input type="text" id="customerName" placeholder="name" autocomplete="off">
-            </div>
-            
-            <div class="input-group">
-                <label>phone number</label>
-                <input type="tel" id="customerPhone" placeholder="phone number" autocomplete="off">
-            </div>
-            
-            <div class="input-group">
-                <label>delivery address</label>
-                <input type="text" id="customerAddress" placeholder="address" autocomplete="off">
-            </div>
-            
-            <div class="modal-actions">
-                <button class="modal-btn cancel" id="cancelModalBtn">cancel</button>
-                <button class="modal-btn submit" id="submitOrderBtn"><i class="fab fa-whatsapp"></i> send order</button>
+<div class="modal-overlay" id="customerModal">
+    <div class="modal-content">
+        <h2>almost there! <span style="font-size: 1.5rem;">📋</span></h2>
+        <p>Please enter your details to complete the order</p>
+
+        <div class="input-group">
+            <label>full name</label>
+            <input type="text" id="customerName" placeholder="name" autocomplete="off">
+        </div>
+
+        <div class="input-group">
+            <label>phone number</label>
+            <input type="tel" id="customerPhone" placeholder="phone number" autocomplete="off">
+        </div>
+
+        <div class="input-group">
+            <label>delivery address</label>
+            <input type="text" id="customerAddress" placeholder="address" autocomplete="off">
+        </div>
+
+        <!-- PAYMENT METHOD -->
+        <div class="input-group">
+            <label>payment method</label>
+
+            <div class="payment-options">
+
+                <label class="payment-option">
+                    <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
+                    <span class="payment-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Cash on Delivery</span>
+                    </span>
+                </label>
+
+                <label class="payment-option">
+                    <input type="radio" name="paymentMethod" value="Wish Money">
+                    <span class="payment-card">
+                        <i class="fas fa-mobile-screen-button"></i>
+                        <span>Wish Money</span>
+                    </span>
+                </label>
+
             </div>
         </div>
+
+        <!-- WISH MONEY INFORMATION -->
+        <div class="wish-money-box" id="wishMoneyBox">
+
+            <div class="wish-title">
+                <i class="fas fa-mobile-screen-button"></i>
+                Wish Money Payment
+            </div>
+
+            <p>
+                Please send the total amount to:
+            </p>
+
+            <div class="wish-number">
+                <i class="fas fa-phone"></i>
+                <strong>03 878 053</strong>
+            </div>
+
+            <p class="wish-instruction">
+                After completing the payment, enter your transaction ID below.
+            </p>
+
+            <input
+                type="text"
+                id="wishTransactionId"
+                placeholder="Wish Money transaction ID"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="modal-actions">
+            <button class="modal-btn cancel" id="cancelModalBtn">
+                cancel
+            </button>
+
+            <button class="modal-btn submit" id="submitOrderBtn">
+                <i class="fab fa-whatsapp"></i>
+                send order
+            </button>
+        </div>
+
     </div>
+</div>
 
     <script>
         (function() {
@@ -911,6 +1122,23 @@
             const customerName = document.getElementById('customerName');
             const customerPhone = document.getElementById('customerPhone');
             const customerAddress = document.getElementById('customerAddress');
+            const wishMoneyBox = document.getElementById('wishMoneyBox');
+const wishTransactionId = document.getElementById('wishTransactionId');
+const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+
+// Show/hide Wish Money section
+paymentMethods.forEach(method => {
+    method.addEventListener('change', function() {
+
+        if (this.value === 'Wish Money') {
+            wishMoneyBox.classList.add('show');
+        } else {
+            wishMoneyBox.classList.remove('show');
+            wishTransactionId.value = '';
+        }
+
+    });
+});
 
             let activeCategory = 'All';
 
@@ -1156,66 +1384,125 @@
             });
 
             // Submit order with customer details
-            submitOrderBtn.addEventListener('click', () => {
-                const name = customerName.value.trim();
-                const phone = customerPhone.value.trim();
-                const address = customerAddress.value.trim();
-                
-                if (!name || !phone || !address) {
-                    alert('Please fill in all fields');
-                    return;
-                }
+            // Submit order with customer details + payment method
+submitOrderBtn.addEventListener('click', () => {
 
-                const items = Object.values(cart);
-                if (!items.length) { 
-                    alert('cart empty'); 
-                    customerModal.style.display = 'none';
-                    return; 
-                }
+    const name = customerName.value.trim();
+    const phone = customerPhone.value.trim();
+    const address = customerAddress.value.trim();
 
-                // Build WhatsApp message with customer details and order
-                const restaurantPhone = '96103878053'; // from header (without +)
-                let msg = '🍽️ *NEW ORDER - Chocolate Touch*%0A';
-                msg += `─────────────────%0A`;
-                msg += `👤 *Name:* ${name}%0A`;
-                msg += `📞 *Phone:* ${phone}%0A`;
-                msg += `📍 *Address:* ${address}%0A`;
-                msg += `─────────────────%0A%0A`;
-                
-                msg += `*YOUR ORDER:*%0A`;
-                items.forEach(i => {
-                    msg += `• ${i.quantity}x ${i.name} - 💰$ ${(i.price * i.quantity).toFixed(2)}%0A%0A`;
-                });
-                
-                const total = items.reduce((a,i)=> a + i.price*i.quantity,0);
-                msg += `%0A*TOTAL: L.L ${total.toFixed(2)}*%0A`;
-                msg += `─────────────────%0A`;
-                msg += `Thank you! We'll check your order.`;
+    // Get selected payment method
+    const selectedPayment = document.querySelector(
+        'input[name="paymentMethod"]:checked'
+    );
 
-                // Open WhatsApp
-                window.open(`https://api.whatsapp.com/send?phone=${restaurantPhone}&text=${msg}`, '_blank');
-                
-                // Close modal and clear fields
-                customerModal.style.display = 'none';
-                customerName.value = '';
-                customerPhone.value = '';
-                customerAddress.value = '';
-                
-                // Optionally clear cart after order
-                // cart = {};
-                // updateCartUI();
-                // drawerOverlay.style.display = 'none';
-            });
+    const paymentMethod = selectedPayment
+        ? selectedPayment.value
+        : 'Cash on Delivery';
+
+    // Get Wish Money transaction ID
+    const transactionId = wishTransactionId.value.trim();
+
+    // Validate customer information
+    if (!name || !phone || !address) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    // Validate Wish Money payment
+    if (paymentMethod === 'Wish Money' && !transactionId) {
+        alert('Please enter your Wish Money transaction ID');
+        wishTransactionId.focus();
+        return;
+    }
+
+    const items = Object.values(cart);
+
+    if (!items.length) {
+        alert('cart empty');
+        customerModal.style.display = 'none';
+        return;
+    }
+
+    // Restaurant WhatsApp number
+    const restaurantPhone = '96103878053';
+
+    // Build WhatsApp message
+    let msg = '🍽️ *NEW ORDER - Chocolate Touch*%0A';
+    msg += `─────────────────%0A`;
+
+    msg += `👤 *Name:* ${name}%0A`;
+    msg += `📞 *Phone:* ${phone}%0A`;
+    msg += `📍 *Address:* ${address}%0A`;
+
+    msg += `─────────────────%0A`;
+    msg += `💳 *PAYMENT METHOD:* ${paymentMethod}%0A`;
+
+    // Add Wish Money information
+    if (paymentMethod === 'Wish Money') {
+        msg += `📱 *Wish Money:* 03 878 053%0A`;
+        msg += `🔢 *Transaction ID:* ${transactionId}%0A`;
+    }
+
+    msg += `─────────────────%0A%0A`;
+
+    msg += `*YOUR ORDER:*%0A`;
+
+    items.forEach(i => {
+        msg += `• ${i.quantity}x ${i.name} - 💰$ ${(i.price * i.quantity).toFixed(2)}%0A`;
+    });
+
+    const total = items.reduce(
+        (a, i) => a + i.price * i.quantity,
+        0
+    );
+
+    msg += `%0A*TOTAL: $ ${total.toFixed(2)}*%0A`;
+    msg += `─────────────────%0A`;
+    msg += `Thank you! We'll check your order.`;
+
+    // Open WhatsApp
+    window.open(
+        `https://api.whatsapp.com/send?phone=${restaurantPhone}&text=${msg}`,
+        '_blank'
+    );
+
+    // Close modal
+    customerModal.style.display = 'none';
+
+    // Clear fields
+    customerName.value = '';
+    customerPhone.value = '';
+    customerAddress.value = '';
+    wishTransactionId.value = '';
+
+    // Reset payment to Cash
+    document.querySelector(
+        'input[name="paymentMethod"][value="Cash on Delivery"]'
+    ).checked = true;
+
+    wishMoneyBox.classList.remove('show');
+
+});
 
             // Close modal if clicking outside
-            customerModal.addEventListener('click', (e) => {
-                if (e.target === customerModal) {
-                    customerModal.style.display = 'none';
-                    customerName.value = '';
-                    customerPhone.value = '';
-                    customerAddress.value = '';
-                }
-            });
+            // Cancel modal
+cancelModalBtn.addEventListener('click', () => {
+
+    customerModal.style.display = 'none';
+
+    customerName.value = '';
+    customerPhone.value = '';
+    customerAddress.value = '';
+    wishTransactionId.value = '';
+
+    // Reset payment method
+    document.querySelector(
+        'input[name="paymentMethod"][value="Cash on Delivery"]'
+    ).checked = true;
+
+    wishMoneyBox.classList.remove('show');
+});
 
             loadFromSheet();
             updateOrderButtonState();
